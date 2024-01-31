@@ -10,22 +10,30 @@ import {
   createContact,
   deleteContact,
 } from 'store/phonebookSlice';
+// import { initialState } from 'store/initialState';
+import { useEffect } from 'react';
+import { getContactsThunk } from 'store/contactsThunk';
+// import { initialState } from 'store/initialState';
 
 const App = () => {
-  const { filter, contacts } = useSelector(state => state.phonebook);
+  const { filter, items } = useSelector(state => state.phonebook);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getContactsThunk())
+  },[dispatch])
+
   const addContact = (name, number) => {
-    contacts.some(i => i.name.toLowerCase() === name.toLowerCase())
+    items.some(i => i.name.toLowerCase() === name.toLowerCase())
       ? alert(`${name}  is already in contacts`)
-      : contacts.some(i => i.number === number)
+      : items.some(i => i.number === number)
       ? alert(`${number} is already in contacts number`)
       : dispatch(createContact(name, number));
   };
 
   const onDeleteContact = id => {
-    dispatch(deleteContact(id, contacts));
+    dispatch(deleteContact(id, items));
   };
 
   const onChangeFilter = e => {
@@ -33,7 +41,7 @@ const App = () => {
   };
 
   const filteredContacts = () => {
-    return contacts.filter(contact =>
+    return items.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };

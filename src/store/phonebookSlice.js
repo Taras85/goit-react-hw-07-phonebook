@@ -7,7 +7,7 @@ export const phonebookSlice = createSlice({
   reducers: {
     createContact: {
       reducer: (state, { payload }) => {
-        state.contacts.push(payload);
+        state.items.push(payload);
       },
 
       prepare: (name, number) => ({
@@ -19,11 +19,11 @@ export const phonebookSlice = createSlice({
       }),
     },
     changeFilter: (state, { payload }) => {
-      state.filter = payload;
+   state.filter = payload;
     },
     deleteContact: {
       reducer: (state, { payload }) => {
-        state.contacts = payload;
+        state.items = payload;
       },
 
       prepare: (id,contacts )=> ({
