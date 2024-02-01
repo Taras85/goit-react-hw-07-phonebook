@@ -5,13 +5,11 @@ import { getContactsThunk } from './contactsThunk';
 const handlePending = state => {
   state.isLoading = true;
 };
-// const handleFulfilled = (state, { payload }) => {
-//   console.log('payload:', payload, '---', state.items);
-
-//   state.isLoading = false;
-//   state.items = payload;
-//   state.error = '';
-// };
+const handleFulfilled = (state, { payload }) => {
+  state.isLoading = false;
+  state.items = payload;
+  state.error = '';
+};
 
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
@@ -24,13 +22,15 @@ export const contactSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getContactsThunk.pending, handlePending)
-      // .addCase(getContactsThunk.fulfilled, handleFulfilled)
-      .addCase(getContactsThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.items = payload;
-        state.error = '';
-        console.log(state.items, '=>>', payload);
-      })
+      .addCase(getContactsThunk.fulfilled, handleFulfilled)
+        // (state, { payload }) => {
+        // console.log( '=>>', state.items);
+        // state.isLoading = false;
+        // state.items = payload;
+        // state.error = '';
+        // console.log(state.items, '=>>', payload);
+      // }
+      // )
       .addCase(getContactsThunk.rejected, handleRejected);
   },
 });

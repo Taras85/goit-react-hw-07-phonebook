@@ -7,7 +7,8 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
   key: 'Phonebook',
   storage,
-  whitelist: ['phonebook'],
+  // whitelist: ['phonebook'],
+  whitelist: ['contact'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

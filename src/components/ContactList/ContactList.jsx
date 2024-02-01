@@ -12,10 +12,10 @@ export function ContactList({ contacts, onDeleteContact  }) {
 
   return (
     <ul className={s.contactList}>
-      {contacts.map(({id, name, number})=>(
+      {contacts.map(({id, name, phone})=>(
           <li key={id} className={s.contactItem}>
             <span className={s.contactName} >{name}:</span>
-            <span >{number}</span>
+            <span >{phone}</span>
             <button className={s.contactButton}
               type="button"
               id={id}
@@ -34,7 +34,7 @@ ContactList.propTypes = {
       PropTypes.shape({
           id: PropTypes.string.isRequired,
           name: PropTypes.string.isRequired,
-          number: PropTypes.string.isRequired,
+          phone: PropTypes.string.isRequired,
       }),
   ),
   onDeleteContact: PropTypes.func.isRequired,

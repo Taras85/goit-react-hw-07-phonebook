@@ -16,7 +16,7 @@ import { getContactsThunk } from 'store/contactsThunk';
 // import { initialState } from 'store/initialState';
 
 const App = () => {
-  const { filter, items } = useSelector(state => state.phonebook);
+  const { filter, items } = useSelector(state => state.contact);
 
   const dispatch = useDispatch();
 
@@ -24,12 +24,12 @@ const App = () => {
     dispatch(getContactsThunk())
   },[dispatch])
 
-  const addContact = (name, number) => {
+  const addContact = (name, phone) => {
     items.some(i => i.name.toLowerCase() === name.toLowerCase())
       ? alert(`${name}  is already in contacts`)
-      : items.some(i => i.number === number)
-      ? alert(`${number} is already in contacts number`)
-      : dispatch(createContact(name, number));
+      : items.some(i => i.phone === phone)
+      ? alert(`${phone} is already in contacts number`)
+      : dispatch(createContact(name, phone));
   };
 
   const onDeleteContact = id => {
