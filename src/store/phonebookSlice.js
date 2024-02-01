@@ -1,39 +1,39 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
-import { initialState } from './initialState';
+// import { createSlice, nanoid } from '@reduxjs/toolkit';
+// import { initialState } from './initialState';
 
-export const phonebookSlice = createSlice({
-  name: 'phonebook',
-  initialState: initialState.phonebook,
-  reducers: {
-    createContact: {
-      reducer: (state, { payload }) => {
-        state.items.push(payload);
-      },
+// export const phonebookSlice = createSlice({
+//   name: 'phonebook',
+//   initialState: initialState.phonebook,
+//   reducers: {
+//     createContact: {
+//       reducer: (state, { payload }) => {
+//         state.items.push(payload);
+//       },
 
-      prepare: (name, number) => ({
-        payload: {
-          id: nanoid(),
-          name,
-          number,
-        },
-      }),
-    },
-    changeFilter: (state, { payload }) => {
-   state.filter = payload;
-    },
-    deleteContact: {
-      reducer: (state, { payload }) => {
-        state.items = payload;
-      },
+//       prepare: (name, number) => ({
+//         payload: {
+//           id: nanoid(),
+//           name,
+//           number,
+//         },
+//       }),
+//     },
+//     changeFilter: (state, { payload }) => {
+//    state.filter = payload;
+//     },
+//     deleteContact: {
+//       reducer: (state, { payload }) => {
+//         state.items = payload;
+//       },
 
-      prepare: (id,contacts )=> ({
-        payload: contacts.filter(contact => contact.id !== id),
-      }),
-    },
-  },
-});
+//       prepare: (id,contacts )=> ({
+//         payload: contacts.filter(contact => contact.id !== id),
+//       }),
+//     },
+//   },
+// });
 
-export const phonebookReducer = phonebookSlice.reducer;
+// export const phonebookReducer = phonebookSlice.reducer;
 
-export const { deleteContact, changeFilter, createContact } =
-  phonebookSlice.actions;
+// export const { deleteContact, changeFilter, createContact } =
+//   phonebookSlice.actions;

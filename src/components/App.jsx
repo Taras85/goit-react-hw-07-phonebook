@@ -5,12 +5,7 @@ import s from './App.module.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  changeFilter,
-  // createContact,
-  // deleteContact,
-} from 'store/phonebookSlice';
-// import { initialState } from 'store/initialState';
+// import { changeFilter } from 'store/phonebookSlice';
 import { useEffect } from 'react';
 import {
   createContactsThunk,
@@ -18,10 +13,11 @@ import {
   getContactsThunk,
 } from 'store/contactsThunk';
 import Loader from './loader/Loader';
-// import { initialState } from 'store/initialState';
+import { changeFilter } from 'store/contactSliсe';
 
 const App = () => {
-  const { filter, items, isLoading } = useSelector(state => state.contact);
+  const {filter, items, isLoading } = useSelector(state => state.contact);
+  // const filter = useSelector(state=>state.filter)
 
   const dispatch = useDispatch();
 
@@ -43,11 +39,14 @@ const App = () => {
 
   const onChangeFilter = e => {
     dispatch(changeFilter(e.target.value));
+    
   };
 
   const filteredContacts = () => {
+
     return items.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
+      
     );
   };
 

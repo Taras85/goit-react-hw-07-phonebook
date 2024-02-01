@@ -1,5 +1,5 @@
 export const initialState = {
-  phonebook: {
+  contacts: {
     filter: '',
     items: [
       // { id: 'id-1', name: 'Rosie Simpson', number: '+38(059)111-11-11' },
@@ -10,4 +10,5 @@ export const initialState = {
     isLoading: false,
     error: null,
   },
+  // filter: '',
 };

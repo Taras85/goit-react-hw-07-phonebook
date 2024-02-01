@@ -39,7 +39,13 @@ const handleRejected = (state, { payload }) => {
 
 export const contactSlice = createSlice({
   name: 'contacts',
-  initialState: initialState.phonebook,
+  initialState: initialState.contacts,
+  reducers: {
+    changeFilter: (state, { payload }) => {
+   state.filter = payload;
+    },
+  },
+
   extraReducers: builder => {
     builder
       // .addCase(getContactsThunk.pending, handlePending)
@@ -79,3 +85,4 @@ export const contactSlice = createSlice({
 });
 
 export const contactReducer = contactSlice.reducer;
+export const {changeFilter} = contactSlice.actions;
