@@ -12,24 +12,29 @@ import {
 } from 'store/phonebookSlice';
 // import { initialState } from 'store/initialState';
 import { useEffect } from 'react';
-import { createContactsThunk, deleteContactsThunk, getContactsThunk } from 'store/contactsThunk';
+import {
+  createContactsThunk,
+  deleteContactsThunk,
+  getContactsThunk,
+} from 'store/contactsThunk';
+import Loader from './loader/Loader';
 // import { initialState } from 'store/initialState';
 
 const App = () => {
-  const { filter, items } = useSelector(state => state.contact);
+  const { filter, items, isLoading } = useSelector(state => state.contact);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getContactsThunk())
-  },[dispatch])
+    dispatch(getContactsThunk());
+  }, [dispatch]);
 
   const addContact = (name, phone) => {
     items.some(i => i.name.toLowerCase() === name.toLowerCase())
       ? alert(`${name}  is already in contacts`)
       : items.some(i => i.phone === phone)
       ? alert(`${phone} is already in contacts number`)
-      : dispatch(createContactsThunk({name, phone}));
+      : dispatch(createContactsThunk({ name, phone }));
   };
 
   const onDeleteContact = id => {
@@ -53,7 +58,8 @@ const App = () => {
       <ContactForm addContact={addContact} />
 
       <h2 className={s.titlePhonebook}>Contacts</h2>
-      <Filter onChangeFilter={onChangeFilter} value={filter} />
+      <Filter onChangeFilter={onChangeFilter} value={filter}></Filter>
+      {isLoading && <Loader />}
       <ContactList
         onDeleteContact={onDeleteContact}
         contacts={filteredContacts()}
