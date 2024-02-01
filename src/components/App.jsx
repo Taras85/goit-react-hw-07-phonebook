@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   changeFilter,
-  createContact,
-  deleteContact,
+  // createContact,
+  // deleteContact,
 } from 'store/phonebookSlice';
 // import { initialState } from 'store/initialState';
 import { useEffect } from 'react';
-import { getContactsThunk } from 'store/contactsThunk';
+import { createContactsThunk, deleteContactsThunk, getContactsThunk } from 'store/contactsThunk';
 // import { initialState } from 'store/initialState';
 
 const App = () => {
@@ -29,11 +29,11 @@ const App = () => {
       ? alert(`${name}  is already in contacts`)
       : items.some(i => i.phone === phone)
       ? alert(`${phone} is already in contacts number`)
-      : dispatch(createContact(name, phone));
+      : dispatch(createContactsThunk({name, phone}));
   };
 
   const onDeleteContact = id => {
-    dispatch(deleteContact(id, items));
+    dispatch(deleteContactsThunk(id, items));
   };
 
   const onChangeFilter = e => {
