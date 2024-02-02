@@ -8,41 +8,43 @@ import {
 
 
 const handlePending = state => {
-  state.isLoading = true;
+  state.contacts.isLoading = true;
 };
 const handleFulfilled = (state) => {
-  state.isLoading = false;
-  state.error = '';
+  state.contacts.isLoading = false;
+  state.contacts.error = '';
 }
 
 
 const handleFulfilledGet = (state, { payload }) => {
   // state.isLoading = false;
-  state.items = payload;
+  state.contacts.items = payload;
   // state.error = '';
 };
 const handleFulfilledCreate = (state, { payload }) => {
   // state.isLoading = false;
-  state.items.push(payload)
+  state.contacts.items.push(payload)
   // state.error = '';
 };
 const handleFulfilledDelete = (state, { payload }) => {
   // state.isLoading = false;
-  state.items = state.items.filter(contact=>contact.id!==payload.id)
+  state.contacts.items = state.contacts.items.filter(contact=>contact.id!==payload.id)
   // state.error = '';
 };
 
 const handleRejected = (state, { payload }) => {
-  state.isLoading = false;
-  state.error = payload;
+  state.contacts.isLoading = false;
+  state.contacts.error = payload;
 };
 
 export const contactSlice = createSlice({
   name: 'contacts',
-  initialState: initialState.contacts,
+  // initialState: initialState.contacts,
+  initialState,
   reducers: {
     changeFilter: (state, { payload }) => {
-   state.filter = payload;
+      state.filter = payload;
+      
     },
   },
 
@@ -59,6 +61,7 @@ export const contactSlice = createSlice({
       // .addCase(deleteContactsThunk.rejected, handleRejected)
       .addMatcher(
         isAnyOf(
+          
           getContactsThunk.pending,
           createContactsThunk.pending,
           deleteContactsThunk.pending
@@ -85,4 +88,5 @@ export const contactSlice = createSlice({
 });
 
 export const contactReducer = contactSlice.reducer;
+
 export const {changeFilter} = contactSlice.actions;

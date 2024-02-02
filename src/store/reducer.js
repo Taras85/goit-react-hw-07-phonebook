@@ -5,6 +5,6 @@ import { contactReducer } from './contactSliсe';
 
 export const reducer = combineReducers({
   
-  contact: contactReducer,
-  // phonebook: phonebookReducer,
+  phoneBook: contactReducer,
+
 });

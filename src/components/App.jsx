@@ -16,10 +16,11 @@ import Loader from './loader/Loader';
 import { changeFilter } from 'store/contactSliсe';
 
 const App = () => {
-  const {filter, items, isLoading } = useSelector(state => state.contact);
-  // const filter = useSelector(state=>state.filter)
+  const {  items, isLoading, error } = useSelector(state => state.phoneBook.contacts);
+  const {filter} = useSelector(state=>state.phoneBook)
 
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(getContactsThunk());
@@ -43,12 +44,14 @@ const App = () => {
   };
 
   const filteredContacts = () => {
-
-    return items.filter(contact =>
+    
+      return items.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
       
-    );
+    )
   };
+
+  console.log('filter:', filter, 'contacts' ,items ,'error', error)
 
   return (
     <div className={s.appContainer}>
@@ -61,8 +64,11 @@ const App = () => {
       {isLoading && <Loader />}
       <ContactList
         onDeleteContact={onDeleteContact}
+        errors = {error}
         contacts={filteredContacts()}
+
       />
+      
     </div>
   );
 };
