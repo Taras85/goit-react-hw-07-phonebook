@@ -1,6 +1,5 @@
 export const initialState = {
   contacts: {
-    // filter: '',
     items: [
       // { id: 'id-1', name: 'Rosie Simpson', number: '+38(059)111-11-11' },
       // { id: 'id-2', name: 'Hermione Kline', number: '+38(059)222-22-22' },

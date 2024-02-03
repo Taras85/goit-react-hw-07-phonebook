@@ -7,11 +7,7 @@ const BASE_URL = `https://${API_KEY}.mockapi.io/contacts`
 export const fetchContacts = async () => {
   const data = await fetch(`${BASE_URL}`, {});
   return await data.json();
-
 };
-
-
-
 
 export const addContact  = async data => {
   const res = await fetch(`${BASE_URL}`, {

@@ -23,18 +23,22 @@ const handleFulfilledGet = (state, { payload }) => {
 };
 const handleFulfilledCreate = (state, { payload }) => {
   // state.isLoading = false;
-  state.contacts.items.push(payload)
+  state.contacts.items.push(payload);
   // state.error = '';
 };
 const handleFulfilledDelete = (state, { payload }) => {
   // state.isLoading = false;
-  state.contacts.items = state.contacts.items.filter(contact=>contact.id!==payload.id)
+    state.contacts.items = state.contacts.items.filter(contact=>contact.id!==payload.id)
   // state.error = '';
 };
 
 const handleRejected = (state, { payload }) => {
+
+  
   state.contacts.isLoading = false;
   state.contacts.error = payload;
+
+    
 };
 
 export const contactSlice = createSlice({

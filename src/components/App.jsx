@@ -15,16 +15,11 @@ import Loader from './loader/Loader';
 import { changeFilter } from 'store/contactSliсe';
 import { contactsSelector, filterSelector } from 'store/selectors';
 
-
-
-
-
 const App = () => {
-  const {  items, isLoading, error } = useSelector(contactsSelector);
-  const {filter} = useSelector(filterSelector)
+  const { items, isLoading, error } = useSelector(contactsSelector);
+  const { filter } = useSelector(filterSelector);
 
   const dispatch = useDispatch();
-  
 
   useEffect(() => {
     dispatch(getContactsThunk());
@@ -44,36 +39,18 @@ const App = () => {
 
   const onChangeFilter = e => {
     dispatch(changeFilter(e.target.value));
-    
   };
 
-  // const filteredContacts = () => {
-    
-  //     return items.filter(contact =>
-  //     contact.name.toLowerCase().includes(filter.toLowerCase())
-      
-  //   )
-  // };
-
-//   const sortedContacts = items && [...items].sort((a, b) => {
-//   const nameA = a.name.toLowerCase();
-//   const nameB = b.name.toLowerCase();
-//   if (nameA < nameB) {
-//     return -1;
-//   }
-//   if (nameA > nameB) {
-//     return 1;
-//   }
-//   return 0;
-  // });
 
   const filteredAndSortedContacts = () => {
     return items
-      .filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
-      .sort((a, b) => a.name.localeCompare(b.name))
-  }
+      .filter(contact =>
+        contact.name.toLowerCase().includes(filter.toLowerCase())
+      )
+      .sort((a, b) => a.name.localeCompare(b.name));
+  };
 
-  console.log('filter=>', filter, 'contacts=>' ,items ,'error=>', error)
+  console.log('filter=>', filter, 'contacts=>', items, 'error=>', error);
 
   return (
     <div className={s.appContainer}>
@@ -86,13 +63,9 @@ const App = () => {
       {isLoading && <Loader />}
       <ContactList
         onDeleteContact={onDeleteContact}
-        errors = {error}
-        // contacts={filteredContacts()}
-        // contacts = {sortedContacts}
-        contacts ={filteredAndSortedContacts()}
-
+        errors={error}
+        contacts={filteredAndSortedContacts()}
       />
-      
     </div>
   );
 };
