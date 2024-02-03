@@ -5,7 +5,6 @@ import s from './App.module.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { changeFilter } from 'store/phonebookSlice';
 import { useEffect } from 'react';
 import {
   createContactsThunk,
@@ -14,10 +13,15 @@ import {
 } from 'store/contactsThunk';
 import Loader from './loader/Loader';
 import { changeFilter } from 'store/contactSliсe';
+import { contactsSelector, filterSelector } from 'store/selectors';
+
+
+
+
 
 const App = () => {
-  const {  items, isLoading, error } = useSelector(state => state.phoneBook.contacts);
-  const {filter} = useSelector(state=>state.phoneBook)
+  const {  items, isLoading, error } = useSelector(contactsSelector);
+  const {filter} = useSelector(filterSelector)
 
   const dispatch = useDispatch();
   
@@ -43,15 +47,33 @@ const App = () => {
     
   };
 
-  const filteredContacts = () => {
+  // const filteredContacts = () => {
     
-      return items.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
+  //     return items.filter(contact =>
+  //     contact.name.toLowerCase().includes(filter.toLowerCase())
       
-    )
-  };
+  //   )
+  // };
 
-  console.log('filter:', filter, 'contacts' ,items ,'error', error)
+//   const sortedContacts = items && [...items].sort((a, b) => {
+//   const nameA = a.name.toLowerCase();
+//   const nameB = b.name.toLowerCase();
+//   if (nameA < nameB) {
+//     return -1;
+//   }
+//   if (nameA > nameB) {
+//     return 1;
+//   }
+//   return 0;
+  // });
+
+  const filteredAndSortedContacts = () => {
+    return items
+      .filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
+      .sort((a, b) => a.name.localeCompare(b.name))
+  }
+
+  console.log('filter=>', filter, 'contacts=>' ,items ,'error=>', error)
 
   return (
     <div className={s.appContainer}>
@@ -65,7 +87,9 @@ const App = () => {
       <ContactList
         onDeleteContact={onDeleteContact}
         errors = {error}
-        contacts={filteredContacts()}
+        // contacts={filteredContacts()}
+        // contacts = {sortedContacts}
+        contacts ={filteredAndSortedContacts()}
 
       />
       
