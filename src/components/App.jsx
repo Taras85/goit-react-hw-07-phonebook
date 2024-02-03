@@ -50,7 +50,7 @@ const App = () => {
       .sort((a, b) => a.name.localeCompare(b.name));
   };
 
-  console.log('filter=>', filter, 'contacts=>', items, 'error=>', error);
+  // console.log('filter=>', filter, 'contacts=>', items, 'error=>', error);
 
   return (
     <div className={s.appContainer}>

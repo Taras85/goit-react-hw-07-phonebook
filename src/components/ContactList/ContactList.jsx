@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
 
 export function ContactList({ errors, contacts, onDeleteContact }) {
-  console.log('contacts:', contacts);
+  // console.log('contacts:', contacts);
 
   return (
     <ul className={s.contactList}>
